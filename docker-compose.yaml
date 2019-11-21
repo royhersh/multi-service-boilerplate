@@ -49,23 +49,10 @@ services:
       - ENV=development
       - APPLICATION_URL=http://ismydependencysafe
     ports:
-      - 80:80
+      - 3000:3000
       - 443:443
     networks:
       - my-network-name
 
-  # ismydependencysafe:
-  #   image: ismydependencysafe:latest
-  #   container_name: production_ismydependencysafe
-  #   expose:
-  #     - "80"
-  #   volumes:
-  #     - /etc/letsencrypt/:/etc/letsencrypt/
-  #   networks:
-  #     - my-network-name
-
 networks:
   my-network-name:
-
-volumes:
-  certificates:
