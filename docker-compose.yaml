@@ -7,24 +7,38 @@ services:
       - 3000
     volumes:
       - ./client:/usr/src/app
-      - /usr/src/app/node_modules      
+      - /usr/src/app/node_modules
     networks:
       - my-network-name
-    command: npm run start      
+    command: npm run start
 
   serviceone:
     build: ./services/service-1
     container_name: serviceone
     ports:
-      - 2000
+      - 4000
     volumes:
       - ./services/service-1:/usr/src/app
-      - /usr/src/app/node_modules      
+      - /usr/src/app/node_modules
     networks:
       - my-network-name
-    command: npm run start      
-  
-  nginx: 
+    command: npm run start
+
+  servicetwo:
+    build: ./services/service-2
+    container_name: servicetwo
+    environment:
+      - PORT=5000
+    ports:
+      - 5000
+    volumes:
+      - ./services/service-2:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - my-network-name
+    command: npm run start
+
+  nginx:
     image: nginx:latest
     container_name: production_nginx
     volumes:
@@ -37,7 +51,7 @@ services:
       - 443:443
     networks:
       - my-network-name
-      
+
   # ismydependencysafe:
   #   image: ismydependencysafe:latest
   #   container_name: production_ismydependencysafe
